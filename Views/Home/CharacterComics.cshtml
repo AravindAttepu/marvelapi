@@ -1,0 +1,57 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model DataContainer<comicitem>
+ 
+<div class="comics" style="text-align: center; ">
+    <h1 style="font-size: 36px; font-weight: bolder;">Comics</h1>
+<div class="navbtns d-flex justify-content-between">
+ 
+                <button onclick="window.location.href='?offset=@(Model.Offset-90 )'" class="btn btn-primary " id= "prevbtn">Prev</button>
+                <button class="btn btn-primary" onclick="window.location.href='?offset=@(Model.Offset+90)'" id="nextbtn">Next</button>
+             </div>
+         
+               
+<div class="row row-cols-2 row--cols-sm-3 row-cols-md-4 p-2 " id="seriesgrid" style="border: 3px solid black; " >
+    @{if(Model.Count<1){
+    <p> No Comics available</p>
+    }
+    else{
+              @foreach (var character in Model.Results)
+        {
+            <div class="col mb-2" style="">
+                <div class="card h-100" style="font-family:;">
+                   <a  asp-action="comics" asp-route-id="@character.ID"> <img src="@character.thumbnail.FullPath" class="card-img-top" style="  " alt="@character.Title"></a>
+                    <div class="card-body">
+                        <h5 class="card-title">@character.Title</h5>
+                        
+                    </div>
+                </div>
+            </div>
+        }
+        }
+    }
+             </div> 
+             <style>
+                .navbtns button{
+                    margin-block: 20px;
+                    padding: 10px;
+                    padding-inline: 20px;
+                    border-radius: 3px;
+                }
+             </style>
+             
+               <script>
+           var offset= @Model.Offset;
+           if(offset-90 <0)
+           {
+           document.getElementById("prevbtn").disabled=true;
+           }
+           else if(offset+90 >@Model.Total)
+           {
+           document.getElementById("nextbtn").disabled=true;
+           }
+           </script>
+
+</div>

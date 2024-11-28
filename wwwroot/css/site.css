@@ -1,0 +1,125 @@
+html {
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+*{
+  font-family: "Marvel", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  margin-bottom: 60px;
+}
+.card img{
+  height:50%;
+
+}
+#comicgrid img {
+  height: 410px;
+}
+#seriesgrid img {
+  height: 410px;
+}
+.seemore{
+  background: linear-gradient(to right, #6a11cb, #2575fc); /* Gradient for the button */
+    color: white; /* Text color */
+    padding: 15px 30px; /* Increase padding for better size */
+    margin-bottom: 5px;
+    font-size: 16px; /* Adjust font size */
+    border: none; /* Remove border */
+    transform: skew(-20deg); /* Skew to create a parallelogram */
+    display: inline-block;
+    position: relative;
+    transition: all 0.3s ease; /* Smooth hover effect */
+}
+.characterinfo{
+  background: linear-gradient(to right, #6a11cb, #2575fc); /* Gradient for the button */
+    color: white; /* Text color */
+    padding: 15px 15px; /* Increase padding for better size */
+    margin-bottom: 5px;
+    font-size: 16px; /* Adjust font size */
+    border: none; /* Remove border */
+    transform: skew(-20deg); /* Skew to create a parallelogram */
+   pointer-events: auto;
+    position: relative;
+    transition: all 0.3s ease; /* Smooth hover effect */
+}
+.characterdata{
+  
+  background-size: cover;
+  background-repeat: no-repeat;
+  backdrop-filter: blur(25px) ;
+    color: white; /* Text color */
+    padding: 15px 15px; /* Increase padding for better size */
+    
+    font-size: 16px; /* Adjust font size */
+    border: none; /* Remove border */
+/* Skew to create a parallelogram */
+   pointer-events: auto;
+    position: relative;
+    transition: all 0.3s ease; /* Smooth hover effect */
+}
+.characterinfo *{
+  display: block;
+  transform: skew(8deg);
+}
+
+.seemore:hover {
+  background: linear-gradient(to right, #2575fc, #6a11cb); /* Reverse gradient on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+  transform: skew(-20deg) scale(1.05); /* Slightly enlarge */
+}
+#characterinfo .heading{
+  width: 50%;
+}
+#characterinfo img{
+  height: 80%; width: 400px;
+}
+
+.searchresults .list-group-item
+{
+  background-color: black;
+  color: white;
+}
+
+.list-group-item {
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+.list-group-item:hover {
+  background-color: #f0f8ff; /* Light blue background on hover */
+  color: #0056b3; /* Text color on hover */
+  cursor: pointer; /* Change cursor to pointer */
+}
+@media (max-width: 992px) {
+  #comicgrid img {
+      height: 310px;
+  }
+  #seriesgrid img {
+    height: 250px;
+}
+#characterinfo img{
+  height: 80%; width: 300px;
+}
+#characterinfo .heading{
+  width: 100%;
+}
+}

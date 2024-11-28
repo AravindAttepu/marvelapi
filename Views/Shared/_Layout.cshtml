@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - marvelapicomics</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/marvelapicomics.styles.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Marvel:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</head>
+<body>
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="d-flex justify-content-center align-items-center position-fixed w-100 h-100 d-none" style="z-index: 100; top: 0; left: 0; background-color: rgba(255, 255, 255, 0.8);">
+        <div class="spinner-grow text-secondary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid d-flex justify-content-between">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"> 
+                    <img class="d-none d-sm-inline" style="height: 30px;" src="~/media/logo-lg.png" alt="">
+                    <img class="d-inline d-sm-none" style="height: 30px;" src="~/media/logo-sm.png" alt="">
+                </a>
+                
+                <a href="https://www.marvel.com/">
+                    <img class="d-none d-sm-inline" style="height: 30px;" src="~/media/marvel-logo.png" alt="">
+                    <img class="d-inline d-sm-none" style="height: 30px;" src="~/media/marvel-logo.png" alt="">
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top text-muted ">
+        <div class="container text-center">
+            &copy; 2024 - tech_bachelor - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div>Designed By: <a href="https://aravindattepu.github.io/my_portfolio/">Aravind</a></div>
+            <div><a href="https://developer.marvel.com">Data provided by Marvel. © 2024 MARVEL</a></div>
+        </div>
+    </footer>
+
+    <script>
+      
+        document.querySelectorAll('.clickable-item').forEach(item => {
+    item.addEventListener('click', function () {
+        // Show the spinner
+        var load=document.getElementById('loadingSpinner');
+        load.classList.toggle("d-none");
+        alert("sdsdsds)");
+
+        // Optional: Delay navigation or action to show the spinner effect
+       // Adjust delay as needed
+    });
+});
+    </script>
+</body>
+</html>

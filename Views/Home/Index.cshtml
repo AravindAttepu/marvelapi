@@ -1,0 +1,312 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model List<Character>
+<script>
+
+</script>
+
+<div class="pageintro" style="">
+  <div id="carouselExampleControls" class="carousel slide w-100 " style="height: 300px; font-family: Roboto, sans-serif;" data-bs-ride="carousel">
+  <div class="carousel-inner  bg-black w-100 h-100"  >
+    <style>
+        .carousel-item {
+           
+            height: inherit;
+           background-color: rgb(149, 30, 30);
+            
+           background-size:cover;
+            background-position: center;
+             background-repeat: no-repeat;
+             cursor: pointer;
+
+          
+          
+           
+        }
+        .carousel_img{
+            float: right;
+            width: 40%;
+            height: 100%;
+           
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    .carousel_text{
+        float: left;
+      flex-direction: column;
+        width: 60%;
+        color:white;
+        
+    
+    }
+    .carousel_text a{
+        text-decoration: none;
+       
+        padding: 10px;
+      transform: skew(-10deg);
+        padding-inline: 20px;
+        background-color: #ca282d;
+        color:white
+
+    }
+
+    .c_heading{
+        font-style:normal;
+        font-weight: bolder;
+        text-decoration:dotted;
+        font-style: ;
+        font-size: 36px;
+
+    }
+    .about{
+     
+    
+    }
+    .mysummary{
+      background-color: black;;
+      transform: skew(-5deg);
+      color: white;
+    padding-block: 50px;
+    margin-bottom: 20px;
+     
+
+    }
+    .pageintro{
+      
+    }
+    </style>
+    <div class="carousel-item active" style="background-image: url('@Url.Content("~/media/spiderman.jpg")') " onclick="window.location.href='characters/1016181/comics';">
+        <div class="carousel_text carousel_img"><h3 class="c_heading">Latest Collections of Spiderman</h3>
+        <p>The new and famous comics for you!!</p>
+        <a href="characters/1016181/comics">Get Now</a>
+        </div>
+        @* <div class="carousel_img">
+      <img class="d-block "  src="~/media/spiderman.png" alt="First slide">
+      </div> *@
+    </div>
+    <div class="carousel-item" style="background-image: url('@Url.Content("~/media/wolverine.jpg")');" onclick="window.location.href='characters/1009718'">
+        <div class="carousel_text carousel_img"><h3 class="c_heading">Unleash the power of Wolverine</h3>
+        <p>The One And Only</p>
+        <a href="characters/1009718">Get Now</a>
+        </div>
+         @* <div class="carousel_img">
+      <img class="d-block " src="~/media/captain-america.png" alt="Second slide">
+      </div> *@
+    </div>
+     <div class="carousel-item" style="background-image: url('@Url.Content("~/media/ultron_banner.jpg")');" onclick="window.location.href='characters/1009685'">
+        <div class="carousel_text carousel_img" style="color: white;"><h3 class="c_heading">Popular Comics of Ultron</h3>
+        <p>Destroy humanity to maintain peace</p>
+        <a href="characters/1009685">Get Now</a>
+        </div>
+         @* <div class="carousel_img">
+      <img class="d-block " src="~/media/ironman.png" alt="Second slide">
+      </div> *@
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </a>
+</div>
+
+<div class="about row row-cols-1 row-cols-sm-2 mt-2 " >
+  <div class="mysummary col text-center">
+  <p style="font-weight: bold; font-style: italic; text-align: justify; line-height: 1.6;">
+    Marvel Comics, a legendary powerhouse in the comic book industry, brings to life iconic superheroes like Spider-Man, Iron Man, and the Avengers. Known for its thrilling stories and groundbreaking characters, it has captivated fans worldwide for generations.
+  </p>
+
+  <div class="row mt-4">
+
+    <div class="col text-center">
+      <p style="font-weight: bold; margin-bottom: 8px;">For any Feedback</p>
+      <a class="btn btn-primary" href="mailto:aravindattepu@gmail.com" style="font-size: 0.9rem;">
+        Email Me
+      </a>
+    </div>
+
+
+    <div class="col text-center">
+      <p style="font-weight: bold; margin-bottom: 8px;">About Me</p>
+      <a href="https://aravindattepu.github.io/my_portfolio/" class="btn btn-secondary" style="font-size: 0.9rem;">
+        My Portfolio
+      </a>
+    </div>
+  </div>
+</div>
+
+ <div class="col  position-relative" >
+  
+  <div class="search d-flex align-items-center m-2">
+    <input 
+      class="form-control w-75 border-3" 
+      type="text" 
+      id="searchbox" 
+      placeholder="Search..." 
+      aria-label="Search box" />
+    
+    <div class="spinner-border d-none ms-2" role="status" id="searchspinner">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    
+    <button 
+      class="btn btn-secondary ms-2" 
+      style="background-color: rgb(186, 186, 35);" 
+      id="searchbtn">
+      Go
+    </button>
+  </div>
+
+  <!-- Search Results -->
+  <div 
+    class="searchresults list-group  position-absolute w-75" 
+    style="cursor: pointer; 
+         margin-left: 8px; 
+        
+        
+         z-index: 100; 
+         text-align: left; 
+         overflow-x: hidden;
+         max-height: 300px; 
+       
+         overflow-y: scroll;"  
+    id="searchresults">
+    <!-- Results will dynamically populate here -->
+  </div>
+</div>
+
+</div>
+
+</div>
+
+<div class="container mt-4">
+    <h1>Marvel Characters</h1>
+    <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 g-4" id="seriesgrid">
+        @foreach (var character in Model)
+        {
+            <div class="col">
+                <div class="card h-100" style="font-family:;">
+                    <a asp-action="characters" asp-route-id="@character.Id"><img src="@character.Thumbnail.FullPath" class="card-img-top" alt="@character.Name"></a>
+                    <div class="card-body">
+                        <h5 class="card-title">@character.Name</h5>
+                        <p class="card-text">@character.Description</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script>
+$(document).ready(function() {
+  var searchid;
+ 
+
+    const searchInput = $("#searchbox");
+    const searchResults = $("#searchresults");
+    searchResults.hide();
+
+console.log(searchInput);
+  $(document).on("click", function (event) {
+
+    if(!$(event.target).is(searchResults) && !$(event.target).closest(searchResults).length)
+    {
+      searchResults.empty();
+      searchResults.hide();
+    }
+  });
+   
+    searchInput.on("input", function() {
+        const query = $(this).val(); 
+    if(searchInput.val() == "")
+    {
+      searchResults.empty();
+      searchResults.hide();
+     
+    }
+
+        if (query.length > 2) {
+           $("#searchspinner").toggleClass("d-none");
+        
+           searchResults.show();
+            $.ajax({
+                url: `getcharacters/${encodeURIComponent(query)}`,
+                method: 'GET',
+               
+                success: function(results) {
+                    searchResults.html("");
+                      $("#searchspinner").toggleClass("d-none");
+                    if (results.length > 0) {
+                        results.forEach(item => {
+                          
+                            searchResults.append(` <p id=${item.id} class="list-group-item list-group-item-action" style="margin-left:8px; margin-bottom:0;">
+                ${item.name}
+            </p>`);
+                        });
+                    } else {
+                        searchResults.html('<div>No results found</div>');
+                    }
+                },
+                error: function(xhr, status, error) {
+                  console.log("Error: ", status, error,xhr,query);
+                  searchResults.html('<div>Error fetching results. Please try again later.</div>');
+}
+            });
+        } else {
+            searchResults.html(''); // Clear results if the input length is 2 or less
+        }
+        
+    });
+
+searchResults.on("click", ".list-group-item", function(event){
+var item = $(this).attr('id');
+searchInput.val($(this).text().trim());
+searchid=item;
+
+});
+
+$("#searchbtn").on("click", function()
+{
+
+window.location.href = `characters/${encodeURIComponent(searchid)}`;
+
+     @* $.ajax({
+                url: `/home/characters/${encodeURIComponent(searchid)}`,
+                method: 'GET',
+               
+                success: function(results) {
+                    searchResults.html(results);
+                    console.log("results",results);
+                    
+
+                    if (results.length > 0) {
+                        results.forEach(item => {
+                          
+                            searchResults.append(` <p id=${item.id} class="list-group-item list-group-item-action" style="margin-left:8px;">
+                ${item.name}
+            </p>`);
+                        });
+                    } else {
+                        searchResults.html('<div>No results found</div>');
+                    }
+                },
+                error: function(xhr, status, error) {
+                  console.log("Error: ", status, error,xhr);
+                  searchResults.html('<div>Error fetching results. Please try again later.</div>');
+}
+            }); *@
+
+//window.location.href = `/home/characters/GetCharacterById`;
+
+
+});
+
+
+});
+
+
+</script>

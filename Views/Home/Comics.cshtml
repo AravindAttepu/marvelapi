@@ -1,0 +1,79 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model comicitem
+<div class="container">
+<div  class="characterdata" style=" background-image: url('@Model.thumbnail.FullPath'); padding: 0;" > 
+     <div class="content d-flex justify-content-around align-items-center flex-wrap-reverse characterdata  w-100"   id= "characterinfo">
+            <div class="heading" style="float: left; width:100% " >
+            <p id=charactertitle style="text-align: center; font-weight: 700;  font-size: 60px;">@Model.Title</p>
+            <div class="description">
+                @{
+                    if(@Model.Description!=null)
+                {
+                    <p id="characterdescription" style="font-size: 26px;">@Model.Description</p>
+                    }
+                    else
+                    {
+                    <p id="characterdescription2" style="font-size: 26px;">@Model.textObjects[0].Text</p>
+                    }
+                 }
+            </div>
+            </div>
+            <div  class="imagelayout" style="float :right;" > 
+
+                <img src="@Model.thumbnail.FullPath" alt="Character photo" style="">
+            </div>
+
+        </div>
+    </div>
+        <div class="comiccontent d-flex flex-wrap justify-content-around mt-5 mb-5">
+            <div class="characters w-50 mb-4">
+                <h1 style="font-weight: bolder; font-size: 50px;">Characters</h1>
+                @{
+                    foreach( var item in Model.Characters.items)
+                    {
+                        <a style="text-decoration: none;" asp-action="getcharactersByName" asp-route-id="@item.Name"> <p style="font-size: 24px;">@item.Name</p></a>
+                    }
+                   
+                }
+                </div>
+                <div class="urls">
+       
+                @{
+                    foreach(var url in Model.Urls)
+                    {
+                       
+                        <button class="seemore" style=" margin-left: 10px; background: linear-gradient(to right, #121015, #8a0d13);" onclick="window.location.href='@url.url';">@url.type</button>
+                    }
+                }
+               
+            </div>
+            </div>
+             @{
+                    foreach(var image in Model.Images)
+                    {
+                        <img src="@image.FullPath" height="100px" alt="Character photo" style="">
+                    }
+                }
+
+
+        
+</div>
+<script>
+
+@* 
+ function toggleHighlight() {
+                if ($(window).width() <= 900) {
+                    $("#characterinfo").removeClass("characterinfo"); // Add class
+                } else {
+                    $("#characterinfo").addClass("characterinfo"); // Remove class
+                }}
+                toggleHighlight();
+                $(window).resize(function () {
+                toggleHighlight();
+            }); *@
+
+</script>

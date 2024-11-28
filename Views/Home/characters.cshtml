@@ -1,0 +1,209 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model CharComicModel
+<div class="container">
+       <div class="intro">
+        <div class="content d-flex justify-content-around align-items-center flex-wrap-reverse characterinfo mb-2"  id= "characterinfo">
+            <div class="heading" style="float: left;  " >
+            <p id=charactertitle style="text-align: start; font-weight: 700;  font-size: 60px;">@Model.character.Name</p>
+            <div class="description">
+                <p id="characterdescription" style="font-size: 26px;">@Model.character.Description</p>
+            </div>
+            </div>
+            <div  class="imagelayout" style="float :right;" > 
+
+                <img src="@Model.character.Thumbnail.FullPath" alt="Character photo" style="">
+            </div>
+
+        </div>
+        <div class="comicslayout mt-3 " >
+            <div class="topicheading d-flex justify-content-between" ><h1  style="font-weight:bolder;">Comics</h1><button onclick="window.location.href='@Model.character.Id/comics'" style="float: right;" class="seemore">See More></button></div>
+            
+             <div class="row row-cols-2 row--cols-sm-3 row-cols-md-4 p-2 " id="comicgrid" style="border: 3px solid black;" >
+                <div class="spinner-border" role="status">
+  <span class="sr-only"></span>
+</div>
+              @* @foreach (var character in Model.comics)
+        {
+            <div class="col" style="">
+                <div class="card h-100" style="font-family:; ">
+                   <a asp-controller="home" asp-action="comics" asp-route-id="@character.ID"> <img src="@character.thumbnail.FullPath" class="card-img-top" style="  " alt="@character.Title"></a>
+                    <div class="card-body">
+                        <h5 class="card-title">@character.Title</h5>
+                       
+                    </div>
+                </div>
+            </div>
+        } *@
+             </div>  
+                  
+        </div>
+
+        <div class="serieslayout mt-3">
+             <div class="topicheading d-flex justify-content-between" ><h1 style="font-weight:bolder;">Series</h1><button onclick="window.location.href='@Model.character.Id/series'" style="float: right;" class="seemore">See More></button></div>
+            
+             <div class="row row-cols-2 row--cols-sm-3 row-cols-md-4 p-2 " id="seriesgrid" style="border: 3px solid black; " >
+                <div class="spinner-border" role="status">
+  <span class="sr-only"></span>
+</div>
+              @* @foreach (var character in Model.series)
+        {
+            <div class="col" style="">
+                <div class="card h-100" style="font-family:;">
+                   <a asp-action="series" asp-route-id="@character.ID" > <img src="@character.thumbnail.FullPath" class="card-img-top" style="  " alt="@character.Title"></a>
+                    <div class="card-body">
+                        <h5 class="card-title">@character.Title</h5>
+                        <span style="display: inline; "><span>@character.StartYear</span>- <span>@character.EndYear</span> <span style="float: right;">Rating: @character.Rating </span></span>
+                    </div>
+                </div>
+            </div>
+        } *@
+             </div>  
+                  
+        </div>
+
+        </div>
+       </div>                                                                                            
+
+
+
+</div>
+<script>
+
+ function toggleHighlight() {
+                if ($(window).width() <= 900) {
+                    $("#characterinfo").removeClass("characterinfo"); // Add class
+                } else {
+                    $("#characterinfo").addClass("characterinfo"); // Remove class
+                }}
+                toggleHighlight();
+                $(window).resize(function () {
+                toggleHighlight();
+            });
+</script>
+@* <script>
+$(document).ready(function(){
+    var searchResults= $("#comicgrid");
+    var charid= @Model.Id;
+    $.ajax({
+ url: `/home/characters/${encodeURIComponent(charid)}/comics`,
+                method: 'GET',
+      success: function(results) {
+                    searchResults.html(results);
+                    console.log("results",results);
+
+                    if (results.length > 0) {
+                        results.forEach(item => {
+                          
+                            searchResults.append(`
+                
+                            <div class="col">
+                            <div class="card h-100">
+                            <img src="${item.FullPath}" class="card-img-top" alt="${item.Name}">
+                            <div class="card-body">
+                            <h5 class="card-title">${item.Name}</h5>
+                            <p class="card-text">${item.Description}</p>
+                            </div>
+                            </div>
+                            </div>`);
+                            });
+                             }
+            
+                     else {
+                        searchResults.html('<div>No results found</div>');
+                    }
+                },
+                error: function(xhr, status, error) {
+                  console.log("Error: ", status, error,xhr);
+                  searchResults.html('<div>Error fetching results. Please try again later.</div>');
+}
+});
+});
+
+</script> *@
+<script>
+    // Fetch comics and series after the character data is displayed
+    
+
+    // Trigger the function after the page is loaded
+  $(document).ready(function () {
+    // Make fetchComicsAndSeries async to use await
+    async function fetchComicsAndSeries(id) {
+        // Fetch comics data
+        await fetchComics(id);
+        // Fetch series data after comics
+        await fetchSeries(id);
+    }
+
+    // Fetch comics data
+    async function fetchComics(id) {
+        try {
+            const response = await fetch(`${id}/charactercomics`);
+            const data = await response.json();
+            let comicsContainer = document.getElementById('comicgrid');
+            comicsContainer.innerHTML = "";
+
+            if ("message" in data) {
+                comicsContainer.innerHTML += `<p>${data.message}</p>`;
+            } else {
+                console.log(data);
+                data.forEach(comic => {
+                    comicsContainer.innerHTML += `<div class="col">
+                        <div class="card h-100" style="font-family:;">
+                            <a href="/Home/comics/${comic.id}">
+                                <img src="${comic.thumbnail.fullPath}" class="card-img-top" alt="${comic.title}">
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">${comic.title}</h5>
+                            </div>
+                        </div>
+                    </div>`;
+                });
+            }
+        } catch (error) {
+            console.error('Error fetching comics:', error);
+        }
+    }
+
+    // Fetch series data
+    async function fetchSeries(id) {
+        try {
+            const response = await fetch(`${id}/characterseries`);
+            const data = await response.json();
+            let seriesContainer = document.getElementById('seriesgrid');
+            seriesContainer.innerHTML = "";
+            console.log(data);
+
+            if ("message" in data) {
+                seriesContainer.innerHTML += `<p>${data.message}</p>`;
+            } else {
+                data.forEach(series => {
+                    seriesContainer.innerHTML += `<div class="col">
+                        <div class="card h-100" style="font-family:;">
+                            <a href="/Home/series/${series.id}">
+                                <img src="${series.thumbnail.fullPath}" class="card-img-top" alt="${series.title}">
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">${series.title}</h5>
+                                <span style="display: inline;">
+                                    <span>${series.startYear}</span> - <span>${series.endYear}</span>
+                                    <span style="float: right;">Rating: ${series.rating}</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>`;
+                });
+            }
+        } catch (error) {
+            console.error('Error fetching series:', error);
+        }
+    }
+
+    var characterId = '@Model.character.Id'; // Use the character's ID from Razor
+    fetchComicsAndSeries(characterId);
+});
+
+</script>
